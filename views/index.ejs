@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	
 	<link rel="shortcut icon" type="png" href="/images/image Education logo.png">
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Comaptible" content="IE=edge">
@@ -19,7 +20,36 @@
 		})
 	</script>
 </head>
-<body>
+<body><% if (user) { %>
+
+<div id="welcomeBox" style="
+position:fixed;
+top:120px;
+left:50%;
+transform:translateX(-50%);
+background:#da5050;
+color:white;
+padding:14px 30px;
+border-radius:10px;
+font-size:20px;
+z-index:9999;
+box-shadow:0 4px 10px rgba(0,0,0,0.3);
+">
+
+👋 Welcome back, <b><%= user.username %></b>!
+
+</div>
+
+<script>
+setTimeout(function(){
+    const box = document.getElementById("welcomeBox");
+    if(box){
+        box.style.display = "none";
+    }
+},4000);
+</script>
+
+<% } %>
 <!-- Navigation Bar -->
 	<header id="header">
 		<nav>
@@ -35,6 +65,22 @@
 			<div class="srch"><input type="text" class="search" placeholder="Search here..."><img src="images/image search.png" alt="search" onclick=slide()></div>
 			<a class="get-started" href="/login">Add an Account</a>
 			<img src="/images/image menu logo.png" class="menu" onclick="sideMenu(0)" alt="menu">
+			<% if (user) { %>
+
+<div class="profile">
+    <span onclick="toggleProfile()">👤 <%= user.username %></span>
+
+    <div id="profileBox" class="profile-box">
+
+        <p><b>Name:</b> <%= user.username %></p>
+        <p><b>Email:</b> <%= user.email %></p>
+
+        <a href="/logout">Logout</a>
+
+    </div>
+</div>
+
+<% } %>
 		</nav>
 		<div class="head-container">
 			<div class="quote">
@@ -191,18 +237,18 @@
 	<footer>
 		<div class="footer-container">
 			<div class="left-col">
-				<img src="images/image Education logo.png" style="width: 200px;">
+				<img src="/images/image Education logo.png" style="width: 200px;">
 				<div class="logo"></div>
 				<div class="social-media">
-					<a href="#"><img src="images/facebook.png"></a>
-					<a href="#"><img src="images/instagram.png"></a>
-					<a href="https://twitter.com"><img src="images/twitter.png"></a>
-					<a href="https://www.youtube.com"><img src="images/youtube.png"></a>
-					<a href="https://www.linkedin.com"><img src="images/linkedin.png"></a>
+					<a href="#"><img src="/images/facebook.png"></a>
+					<a href="#"><img src="/images/instagram.png"></a>
+					<a href="https://twitter.com"><img src="/images/twitter.png"></a>
+					<a href="https://www.youtube.com"><img src="/images/youtube.png"></a>
+					<a href="https://www.linkedin.com"><img src="/images/linkedin.png"></a>
 				</div><br><br>
 				<p class="rights-text">Copyright © 2024 Created By Abhay, Ashu, Sukhpreet All Rights Reserved.</p>
-				<br><p><img src="images/location.png"> Chitkara University<br>Rajpura, Punjab-140401.</p><br>
-				<p><img src="images/phone.png"> +91-1234-567-890<br><img src="images/mail.png">&nbsp; Linkden.123@.com</p>
+				<br><p><img src="/images/location.png"> Chitkara University<br>Rajpura, Punjab-140401.</p><br>
+				<p><img src="/images/phone.png"> +91-1234-567-890<br><img src="/images/mail.png">&nbsp; Linkden.123@.com</p>
 			</div>
 			<div class="right-col">
 				<h1 style="color: #fff">Our Newsletter</h1>
@@ -215,6 +261,12 @@
 			</div>
 		</div>
 	</footer>
+	<script>
+function toggleProfile() {
+    const box = document.getElementById("profileBox");
+    box.style.display = box.style.display === "block" ? "none" : "block";
+}
+</script>
 
 </body>
 </html>

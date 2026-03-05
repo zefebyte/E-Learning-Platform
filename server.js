@@ -3,6 +3,12 @@ const app = express();
 const fs = require("fs");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+const session = require("express-session");
+app.use(session({
+    secret: "elearning-secret",
+    resave: false,
+    saveUninitialized: true
+}));
 
 // EJS setup
 app.set("view engine", "ejs");
@@ -11,8 +17,14 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 
 // routes
-app.get("/", (req,res)=>{
-    res.render("index");
+app.get("/", (req, res) => {
+
+    console.log("SESSION USER:", req.session.user);
+
+    const user = req.session.user;
+
+    res.render("index", { user });
+
 });
 
 app.get("/login",(req,res)=>{
@@ -56,10 +68,27 @@ app.post("/login", (req, res) => {
 
     const users = JSON.parse(fs.readFileSync("users.json"));
 
-    const user = users.find(u => u.username === username && u.password === password);
+    const user = users.find(
+        u => u.username === username && u.password === password
+    );
 
     if (user) {
-        res.redirect("/");
+
+        // store user in session
+        req.session.user = {
+            username: user.username,
+            email: user.email
+        };
+
+        // save session before redirect
+        req.session.save(function(err) {
+            if (err) {
+                console.log(err);
+                return res.send("Session error");
+            }
+            res.redirect("/");
+        });
+
     } else {
         res.send("Invalid username or password");
     }
@@ -71,6 +100,13 @@ app.post("/signup", (req, res) => {
 
     let users = JSON.parse(fs.readFileSync("users.json"));
 
+    // check if email already exists
+    const existingUser = users.find(u => u.email === email);
+
+    if (existingUser) {
+        return res.send("Account with this email already exists");
+    }
+
     users.push({
         username,
         email,
@@ -78,6 +114,13 @@ app.post("/signup", (req, res) => {
     });
 
     fs.writeFileSync("users.json", JSON.stringify(users, null, 2));
+
+    res.redirect("/login");
+
+});
+app.get("/logout", (req, res) => {
+
+    req.session.destroy();
 
     res.redirect("/login");
 
