@@ -3,6 +3,8 @@ const app = express();
 const fs = require("fs");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
 const session = require("express-session");
 app.use(session({
     secret: "elearning-secret",
@@ -64,7 +66,7 @@ app.get("/history", (req, res) => {
 
 app.post("/login", (req, res) => {
 
-    const { username, password } = req.body;
+    const { username, password, remember } = req.body;
 
     const users = JSON.parse(fs.readFileSync("users.json"));
 
@@ -74,13 +76,18 @@ app.post("/login", (req, res) => {
 
     if (user) {
 
-        // store user in session
         req.session.user = {
             username: user.username,
             email: user.email
         };
 
-        // save session before redirect
+        // If remember me is checked → keep session longer
+        if (remember) {
+            req.session.cookie.maxAge = 7 * 24 * 60 * 60 * 1000; // 7 days
+        } else {
+            req.session.cookie.expires = false; // session ends when browser closes
+        }
+
         req.session.save(function(err) {
             if (err) {
                 console.log(err);

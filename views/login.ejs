@@ -44,6 +44,7 @@ $(document).ready(function(){
 	<!-- LOGIN FORM -->
 	<form id="login" class="input-group" action="/login" method="POST">
 
+
 		<div class="inp">
 			<img src="/images/image user.png">
 			<input 
@@ -54,6 +55,7 @@ $(document).ready(function(){
 				style="width:88%; border:none;"
 				required>
 		</div>
+		
 
 		<div class="inp">
 			<img src="/images/image password.png">
@@ -66,7 +68,7 @@ $(document).ready(function(){
 				required>
 		</div>
 
-		<input type="checkbox" class="check-box"> Remember Password
+		<input type="checkbox" class="check-box" name="remember"> Remember Me
 
 		<button type="submit" class="submit-btn">Log In</button>
 
