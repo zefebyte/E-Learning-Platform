@@ -1,0 +1,21 @@
+{
+  "name": "e-learning-platform-main",
+  "version": "1.0.0",
+  "description": "Description: A responsive and interactive E-Learning Platform designed using HTML, CSS, and JavaScript. This platform offers a user-friendly interface where students can access courses, watch tutorials, and track progress in a seamless way.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "ejs": "^4.0.1",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

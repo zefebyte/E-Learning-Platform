@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="shortcut icon" type="png" href="/images/image Education logo.png">
+	<title>Login SignUp</title>
+	<link rel="stylesheet" type="text/css" href="/css/style1.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+function validatePasswords() {
+	let pass = document.getElementById("passed").value;
+	let confirm = document.getElementById("confirmpassed").value;
+
+	if(pass !== confirm){
+		document.getElementById("error-message").style.display = "block";
+		return false;
+	}
+	return true;
+}
+
+$(document).ready(function(){
+  $("#login").submit(function(){
+    alert("Login Successful!");
+  });
+});
+</script>
+
+</head>
+
+
+<body>
+
+<div class="form-box">
+
+	<div class="button-box">
+		<div id="btn"></div>
+		<button type="button" class="toggle-btn" id="log" onclick="login()" style="color:#250707;">Log In</button>
+		<button type="button" class="toggle-btn" id="reg" onclick="register()">Sign Up</button>
+	</div>
+
+
+	<!-- LOGIN FORM -->
+	<form id="login" class="input-group" action="/login" method="POST">
+
+		<div class="inp">
+			<img src="/images/image user.png">
+			<input 
+				type="text"
+				name="username"
+				class="input-field"
+				placeholder="Username"
+				style="width:88%; border:none;"
+				required>
+		</div>
+
+		<div class="inp">
+			<img src="/images/image password.png">
+			<input
+				type="password"
+				name="password"
+				class="input-field"
+				placeholder="Password"
+				style="width:88%; border:none;"
+				required>
+		</div>
+
+		<input type="checkbox" class="check-box"> Remember Password
+
+		<button type="submit" class="submit-btn">Log In</button>
+
+	</form>
+
+
+
+	<!-- SIGNUP FORM -->
+	<form id="register" class="input-group" action="/signup" method="POST" onsubmit="return validatePasswords()">
+
+		<input
+			type="text"
+			name="username"
+			class="input-field"
+			placeholder="Full Name"
+			required>
+
+		<input
+			type="email"
+			name="email"
+			class="input-field"
+			placeholder="Email Address"
+			required>
+
+		<input
+			type="password"
+			name="password"
+			id="passed"
+			class="input-field"
+			placeholder="Create Password"
+			required>
+
+		<input
+			type="password"
+			id="confirmpassed"
+			class="input-field"
+			placeholder="Confirm Password"
+			required>
+
+		<span id="error-message" style="color:red; display:none;">
+			Passwords do not match!
+		</span>
+
+		<input type="checkbox" class="check-box" required>
+		I agree to the Terms & Conditions
+
+		<button type="submit" class="submit-btn reg-btn">Sign Up</button>
+
+	</form>
+
+</div>
+
+<script src="/js/script.js"></script>
+
+</body>
+</html>
