@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="shortcut icon" type="png" href="/images/image Education logo.png">
+	<title>Login SignUp</title>
+	<link rel="stylesheet" type="text/css" href="/css/style1.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+function validatePasswords() {
+	let pass = document.getElementById("passed").value;
+	let confirm = document.getElementById("confirmpassed").value;
+
+	if(pass !== confirm){
+		document.getElementById("error-message").style.display = "block";
+		return false;
+	}
+	return true;
+}
+
+</script>
+
+</head>
+
+
+<body>
+
+<div class="form-box">
+
+	<div class="button-box">
+		<button type="button" class="toggle-btn" style="width:100%; text-align:center;">Log In</button>
+	</div>
+	
+	<% if (typeof error !== 'undefined' && error) { %>
+		<div style="color:red; text-align:center; margin-bottom:10px;"><%= error %></div>
+	<% } %>
+
+
+	<!-- LOGIN FORM -->
+	<form id="login" class="input-group" action="/login" method="POST">
+
+
+		<div class="inp">
+			<img src="/images/image user.png">
+			<input 
+				type="text"
+				name="username"
+				class="input-field"
+				placeholder="Username"
+				style="width:88%; border:none;"
+				required>
+		</div>
+		
+
+		<div class="inp">
+			<img src="/images/image password.png">
+			<input
+				type="password"
+				name="password"
+				class="input-field"
+				placeholder="Password"
+				style="width:88%; border:none;"
+				required>
+		</div>
+
+		<input type="checkbox" class="check-box" name="remember"> Remember Me
+
+		<button type="submit" class="submit-btn">Log In</button>
+
+		<div style="text-align:center; margin-top:15px; margin-bottom:10px;">
+			<span style="color:#777; font-size:13px;">OR</span>
+		</div>
+		
+		<a href="/auth/google" class="google-btn">
+			<img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google">
+			Continue with Google
+		</a>
+
+	</form>
+
+
+
+		<div style="text-align:center; margin-top:20px; font-size:13px;">
+			Don't have an account? <a href="/signup" style="color: #DF2771; text-decoration:none;">Sign up here</a>
+		</div>
+
+</div>
+
+<script src="/js/script.js"></script>
+
+</body>
+</html>

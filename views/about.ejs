@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>About Us</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+	<%- include('index') %>
+	<!-- The index view already contains the about section and navigation, 
+		but ideally we'd extract a header/footer partial. 
+		For now, this simple view just redirects back to index or displays basic text.
+		Since index.ejs is monolithic, we'll just provide a basic placeholder that works. -->
+	<div style="padding: 100px; text-align: center;">
+		<h1>About Us</h1>
+		<p>This is a dedicated about page.</p>
+		<a href="/">Go Back Home</a>
+	</div>
+</body>
+</html>
