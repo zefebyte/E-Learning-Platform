@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="shortcut icon" type="png" href="/images/image Education logo.png">
+	<title>Sign Up</title>
+	<link rel="stylesheet" type="text/css" href="/css/style1.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+function validatePasswords() {
+	let pass = document.getElementById("passed").value;
+	let confirm = document.getElementById("confirmpassed").value;
+
+	if(pass !== confirm){
+		document.getElementById("error-message").style.display = "block";
+		return false;
+	}
+	return true;
+}
+</script>
+</head>
+<body>
+<div class="form-box">
+	<div class="button-box">
+		<button type="button" class="toggle-btn" style="width:100%; text-align:center;">Sign Up</button>
+	</div>
+	
+	<% if (typeof error !== 'undefined' && error) { %>
+		<div style="color:red; text-align:center; margin-bottom:10px;"><%= error %></div>
+	<% } %>
+
+	<!-- SIGNUP FORM -->
+	<form id="register" class="input-group" action="/signup" method="POST" enctype="multipart/form-data" onsubmit="return validatePasswords()">
+
+		<input
+			type="text"
+			name="username"
+			class="input-field"
+			placeholder="Full Name"
+			required>
+
+		<input
+			type="email"
+			name="email"
+			class="input-field"
+			placeholder="Email Address"
+			required>
+
+		<input
+			type="password"
+			name="password"
+			id="passed"
+			class="input-field"
+			placeholder="Create Password"
+			required>
+
+		<input
+			type="password"
+			id="confirmpassed"
+			class="input-field"
+			placeholder="Confirm Password"
+			required>
+
+		<!-- Profile Picture Upload -->
+		<label style="font-size:12px; color:#555; margin-top:10px; display:block;">Profile Picture (Optional)</label>
+		<input
+			type="file"
+			name="profilePicture"
+			class="input-field"
+			accept="image/*"
+			style="border:none; padding:10px 0;">
+
+		<span id="error-message" style="color:red; display:none; font-size:12px;">
+			Passwords do not match!
+		</span>
+
+		<div style="margin-top:10px; font-size:12px;">
+			<input type="checkbox" class="check-box" required>
+			I agree to the Terms & Conditions
+		</div>
+
+		<button type="submit" class="submit-btn reg-btn" style="margin-top:20px;">Sign Up</button>
+
+		<div style="text-align:center; margin-top:15px; margin-bottom:10px;">
+			<span style="color:#777; font-size:13px;">OR</span>
+		</div>
+		
+		<a href="/auth/google" class="google-btn">
+			<img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google">
+			Continue with Google
+		</a>
+
+		<div style="text-align:center; margin-top:15px; font-size:13px;">
+			Already have an account? <a href="/login" style="color: #DF2771; text-decoration:none;">Log in here</a>
+		</div>
+	</form>
+</div>
+</body>
+</html>
