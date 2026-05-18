@@ -41,6 +41,30 @@ router.get("/signup", (req, res) => {
     if (req.user) return res.redirect("/");
     res.render("signup", { error: null });
 });
+router.get("/search", (req, res) => {
+
+    const searchText = req.query.query;
+
+    const courses = [
+        "Python",
+        "Java",
+        "JavaScript",
+        "Data Structures",
+        "Operating System",
+        "Computer Networks"
+    ];
+
+    const filteredCourses = courses.filter(course =>
+        course.toLowerCase().includes(searchText.toLowerCase())
+    );
+
+    res.render("searchResults", {
+        user: req.user,
+        searchText,
+        filteredCourses
+    });
+
+});
 
 router.get("/about", (req, res) => res.render("about", { user: req.user }));
 router.get("/contact", (req, res) => res.render("contact", { user: req.user }));
